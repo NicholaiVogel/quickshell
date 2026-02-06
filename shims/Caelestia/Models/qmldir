@@ -1,0 +1,3 @@
+module Caelestia.Models
+FileSystemModel 1.0 FileSystemModel.qml
+FileSystemEntry 1.0 FileSystemEntry.qml

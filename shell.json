@@ -1,0 +1,11 @@
+{
+  "general": {
+    "apps": {
+      "terminal": ["kitty"],
+      "explorer": ["thunar"]
+    }
+  },
+  "paths": {
+    "wallpaperDir": "~/Pictures/Wallpapers"
+  }
+}

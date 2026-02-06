@@ -1,0 +1,4 @@
+module Caelestia.Services
+CavaProvider 1.0 CavaProvider.qml
+BeatTracker 1.0 BeatTracker.qml
+ServiceRef 1.0 ServiceRef.qml
