@@ -31,8 +31,6 @@ QtObject {
         return k ?? "";
     }
 
-    signal frequencyChanged()
-
     function incrementFrequency() {
         frequency++;
         root.frequencyChanged();

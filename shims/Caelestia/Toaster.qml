@@ -9,8 +9,6 @@ QtObject {
     // index access, unshift, splice, indexOf)
     property var toasts: []
 
-    signal toastsChanged()
-
     function toast(title, message, icon, type, timeout) {
         if (type === undefined)
             type = Toast.Info;

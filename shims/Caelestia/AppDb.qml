@@ -9,10 +9,6 @@ QtObject {
     required property var entries
     property var apps: []
 
-    signal pathChanged()
-    signal entriesChanged()
-    signal appsChanged()
-
     onPathChanged: _loadFrequencies()
     onEntriesChanged: _rebuildTimer.restart()
 

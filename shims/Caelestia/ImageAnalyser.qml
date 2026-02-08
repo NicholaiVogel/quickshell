@@ -10,12 +10,6 @@ QtObject {
     property color dominantColour: "#000000"
     property real luminance: 0.0
 
-    signal sourceChanged()
-    signal sourceItemChanged()
-    signal rescaleSizeChanged()
-    signal dominantColourChanged()
-    signal luminanceChanged()
-
     onSourceChanged: {
         if (sourceItem) {
             sourceItem = null;

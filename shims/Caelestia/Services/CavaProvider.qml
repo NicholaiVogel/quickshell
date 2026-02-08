@@ -5,6 +5,7 @@ import QtQuick
 // values is always an array of 0s matching the bars count.
 
 QtObject {
+    property int refCount: 0
     property int bars: 0
     property var values: []
 
