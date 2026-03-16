@@ -24,13 +24,13 @@
       "mediaGifSpeedAdjustment": 300,
       "sessionGifSpeed": 0.7,
       "durations": {
-        "scale": 1
+        "scale": 0.5175983223322332
       }
     },
     "transparency": {
-      "enabled": false,
+      "enabled": true,
       "base": 0.85,
-      "layers": 0.4
+      "layers": 0.8444934337183718
     }
   },
   "general": {
@@ -50,26 +50,9 @@
       ]
     },
     "idle": {
-      "lockBeforeSleep": true,
+      "lockBeforeSleep": false,
       "inhibitWhenAudio": true,
-      "timeouts": [
-        {
-          "idleAction": "lock",
-          "timeout": 180
-        },
-        {
-          "idleAction": "dpms off",
-          "returnAction": "dpms on",
-          "timeout": 300
-        },
-        {
-          "idleAction": [
-            "systemctl",
-            "suspend-then-hibernate"
-          ],
-          "timeout": 600
-        }
-      ]
+      "timeouts": []
     },
     "battery": {
       "warnLevels": [
@@ -125,7 +108,7 @@
   "bar": {
     "persistent": true,
     "showOnHover": true,
-    "dragThreshold": 20,
+    "dragThreshold": 22,
     "scrollActions": {
       "workspaces": true,
       "volume": true,
@@ -140,8 +123,8 @@
       "shown": 5,
       "activeIndicator": true,
       "occupiedBg": false,
-      "showWindows": true,
-      "showWindowsOnSpecialWorkspaces": true,
+      "showWindows": false,
+      "showWindowsOnSpecialWorkspaces": false,
       "activeTrail": false,
       "perMonitorWorkspaces": true,
       "label": "  ",
@@ -151,14 +134,14 @@
       "specialWorkspaceIcons": []
     },
     "tray": {
-      "background": false,
+      "background": true,
       "recolour": false,
       "compact": false,
       "iconSubs": []
     },
     "status": {
-      "showAudio": false,
-      "showMicrophone": false,
+      "showAudio": true,
+      "showMicrophone": true,
       "showKbLayout": false,
       "showNetwork": true,
       "showWifi": true,
