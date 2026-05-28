@@ -33,6 +33,7 @@ Item {
         animate: true
         text: Icons.getAppCategoryIcon(Hypr.activeToplevel?.lastIpcObject.class, "desktop_windows")
         color: root.colour
+        font.pointSize: Appearance.font.size.large
     }
 
     Title {

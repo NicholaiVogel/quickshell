@@ -4,21 +4,20 @@ import qs.config
 import Quickshell
 import QtQuick
 
-Item {
+StyledRect {
     id: root
 
     required property PersistentProperties visibilities
 
-    implicitWidth: icon.implicitHeight + Appearance.padding.small * 2
-    implicitHeight: icon.implicitHeight
+    implicitWidth: Config.bar.sizes.innerWidth
+    implicitHeight: Config.bar.sizes.innerWidth
+    radius: Appearance.rounding.full
+    color: Colours.tPalette.m3surfaceContainerLow
+    border.width: 1
+    border.color: Qt.alpha(Colours.palette.m3error, 0.35)
 
     StateLayer {
-        // Cursed workaround to make the height larger than the parent
-        anchors.fill: undefined
-        anchors.centerIn: parent
-        implicitWidth: implicitHeight
-        implicitHeight: icon.implicitHeight + Appearance.padding.small * 2
-
+        anchors.fill: parent
         radius: Appearance.rounding.full
 
         function onClicked(): void {
@@ -35,6 +34,6 @@ Item {
         text: "power_settings_new"
         color: Colours.palette.m3error
         font.bold: true
-        font.pointSize: Appearance.font.size.normal
+        font.pointSize: Appearance.font.size.larger
     }
 }

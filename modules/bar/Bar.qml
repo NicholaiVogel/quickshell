@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import qs.services
 import qs.config
+import qs.components
 import "popouts" as BarPopouts
 import "components"
 import "components/workspaces"
@@ -9,7 +10,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 
-ColumnLayout {
+Item {
     id: root
 
     required property ShellScreen screen
@@ -30,7 +31,7 @@ ColumnLayout {
     }
 
     function checkPopout(y: real): void {
-        const ch = childAt(width / 2, y) as WrappedLoader;
+        const ch = layout.childAt(width / 2, y) as WrappedLoader;
 
         if (ch?.id !== "tray")
             closeTray();
@@ -76,7 +77,7 @@ ColumnLayout {
     }
 
     function handleWheel(y: real, angleDelta: point): void {
-        const ch = childAt(width / 2, y) as WrappedLoader;
+        const ch = layout.childAt(width / 2, y) as WrappedLoader;
         if (ch?.id === "workspaces" && Config.bar.scrollActions.workspaces) {
             // Workspace scroll
             const mon = (Config.bar.workspaces.perMonitorWorkspaces ? Hypr.monitorFor(screen) : Hypr.focusedMonitor);
@@ -101,68 +102,85 @@ ColumnLayout {
         }
     }
 
-    spacing: Appearance.spacing.normal
+    StyledRect {
+        anchors.fill: parent
+        anchors.margins: Math.max(1, Config.border.thickness / 3)
 
-    Repeater {
-        id: repeater
+        radius: Appearance.rounding.large
+        color: Colours.transparency.enabled ? Colours.layer(Colours.palette.m3surfaceContainerLowest, 2) : Colours.palette.m3surfaceContainerLowest
+        border.width: 1
+        border.color: Qt.alpha(Colours.palette.m3outlineVariant, 0.18)
+    }
 
-        model: Config.bar.entries
+    ColumnLayout {
+        id: layout
 
-        DelegateChooser {
-            role: "id"
+        property int vPadding: root.vPadding
 
-            DelegateChoice {
-                roleValue: "spacer"
-                delegate: WrappedLoader {
-                    Layout.fillHeight: enabled
-                }
-            }
-            DelegateChoice {
-                roleValue: "logo"
-                delegate: WrappedLoader {
-                    sourceComponent: OsIcon {}
-                }
-            }
-            DelegateChoice {
-                roleValue: "workspaces"
-                delegate: WrappedLoader {
-                    sourceComponent: Workspaces {
-                        screen: root.screen
+        anchors.fill: parent
+        spacing: Appearance.spacing.normal
+
+        Repeater {
+            id: repeater
+
+            model: Config.bar.entries
+
+            DelegateChooser {
+                role: "id"
+
+                DelegateChoice {
+                    roleValue: "spacer"
+                    delegate: WrappedLoader {
+                        Layout.fillHeight: enabled
                     }
                 }
-            }
-            DelegateChoice {
-                roleValue: "activeWindow"
-                delegate: WrappedLoader {
-                    sourceComponent: ActiveWindow {
-                        bar: root
-                        monitor: Brightness.getMonitorForScreen(root.screen)
+                DelegateChoice {
+                    roleValue: "logo"
+                    delegate: WrappedLoader {
+                        sourceComponent: OsIcon {}
                     }
                 }
-            }
-            DelegateChoice {
-                roleValue: "tray"
-                delegate: WrappedLoader {
-                    sourceComponent: Tray {}
+                DelegateChoice {
+                    roleValue: "workspaces"
+                    delegate: WrappedLoader {
+                        sourceComponent: Workspaces {
+                            screen: root.screen
+                        }
+                    }
                 }
-            }
-            DelegateChoice {
-                roleValue: "clock"
-                delegate: WrappedLoader {
-                    sourceComponent: Clock {}
+                DelegateChoice {
+                    roleValue: "activeWindow"
+                    delegate: WrappedLoader {
+                        sourceComponent: ActiveWindow {
+                            bar: layout
+                            monitor: Brightness.getMonitorForScreen(root.screen)
+                        }
+                    }
                 }
-            }
-            DelegateChoice {
-                roleValue: "statusIcons"
-                delegate: WrappedLoader {
-                    sourceComponent: StatusIcons {}
+                DelegateChoice {
+                    roleValue: "tray"
+                    delegate: WrappedLoader {
+                        sourceComponent: Tray {}
+                    }
                 }
-            }
-            DelegateChoice {
-                roleValue: "power"
-                delegate: WrappedLoader {
-                    sourceComponent: Power {
-                        visibilities: root.visibilities
+                DelegateChoice {
+                    roleValue: "clock"
+                    delegate: WrappedLoader {
+                        sourceComponent: Clock {}
+                    }
+                }
+                DelegateChoice {
+                    roleValue: "statusIcons"
+                    delegate: WrappedLoader {
+                        sourceComponent: StatusIcons {}
+                    }
+                }
+                DelegateChoice {
+                    roleValue: "power"
+                    delegate: WrappedLoader {
+                        sourceComponent: Power {
+                            visibilities: root.visibilities
+                        }
                     }
                 }
             }

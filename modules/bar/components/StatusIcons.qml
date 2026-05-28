@@ -13,11 +13,13 @@ import QtQuick.Layouts
 StyledRect {
     id: root
 
-    property color colour: Colours.palette.m3secondary
+    property color colour: Colours.palette.m3onSurfaceVariant
     readonly property alias items: iconColumn
 
-    color: Colours.tPalette.m3surfaceContainer
+    color: Colours.tPalette.m3surfaceContainerLow
     radius: Appearance.rounding.full
+    border.width: 1
+    border.color: Qt.alpha(Colours.palette.m3outlineVariant, 0.28)
 
     clip: true
     implicitWidth: Config.bar.sizes.innerWidth
@@ -55,6 +57,7 @@ StyledRect {
 
                         text: "keyboard_capslock_badge"
                         color: root.colour
+                        font.pointSize: Appearance.font.size.large
 
                         Behavior on opacity {
                             Anim {}
@@ -86,6 +89,7 @@ StyledRect {
 
                         text: "looks_one"
                         color: root.colour
+                        font.pointSize: Appearance.font.size.large
 
                         Behavior on opacity {
                             Anim {}
@@ -112,6 +116,7 @@ StyledRect {
                 animate: true
                 text: Icons.getVolumeIcon(Audio.volume, Audio.muted)
                 color: root.colour
+                font.pointSize: Appearance.font.size.large
             }
         }
 
@@ -124,6 +129,7 @@ StyledRect {
                 animate: true
                 text: Icons.getMicVolumeIcon(Audio.sourceVolume, Audio.sourceMuted)
                 color: root.colour
+                font.pointSize: Appearance.font.size.large
             }
         }
 
@@ -149,6 +155,7 @@ StyledRect {
                 animate: true
                 text: Nmcli.active ? Icons.getNetworkIcon(Nmcli.active.strength ?? 0) : "wifi_off"
                 color: root.colour
+                font.pointSize: Appearance.font.size.large
             }
         }
 
@@ -161,6 +168,7 @@ StyledRect {
                 animate: true
                 text: "cable"
                 color: root.colour
+                font.pointSize: Appearance.font.size.large
             }
         }
 
@@ -185,6 +193,7 @@ StyledRect {
                         return "bluetooth";
                     }
                     color: root.colour
+                    font.pointSize: Appearance.font.size.large
                 }
 
                 // Connected bluetooth devices
@@ -201,6 +210,7 @@ StyledRect {
                         animate: true
                         text: Icons.getBluetoothIcon(modelData?.icon)
                         color: root.colour
+                        font.pointSize: Appearance.font.size.large
                         fill: 1
 
                         SequentialAnimation on opacity {
@@ -256,6 +266,7 @@ StyledRect {
                     return charging ? `battery_charging_${(level + 3) * 10}` : `battery_${level}_bar`;
                 }
                 color: !UPower.onBattery || UPower.displayDevice.percentage > 0.2 ? root.colour : Colours.palette.m3error
+                font.pointSize: Appearance.font.size.large
                 fill: 1
             }
         }

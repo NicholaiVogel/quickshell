@@ -122,10 +122,10 @@
     "workspaces": {
       "shown": 5,
       "activeIndicator": true,
-      "occupiedBg": false,
+      "occupiedBg": true,
       "showWindows": false,
       "showWindowsOnSpecialWorkspaces": false,
-      "activeTrail": false,
+      "activeTrail": true,
       "perMonitorWorkspaces": true,
       "label": "  ",
       "occupiedLabel": "󰮯",

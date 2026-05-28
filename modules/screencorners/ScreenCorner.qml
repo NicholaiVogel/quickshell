@@ -13,8 +13,8 @@ StyledWindow {
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.exclusionMode: ExclusionMode.Ignore
 
-    width: cornerSize
-    height: cornerSize
+    implicitWidth: cornerSize
+    implicitHeight: cornerSize
 
     // Pass all input through — purely visual
     mask: Region {}
